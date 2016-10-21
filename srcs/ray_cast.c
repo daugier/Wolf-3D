@@ -6,13 +6,13 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 17:21:29 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/06 17:16:03 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/21 23:31:16 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-void		calc_vect(t_struct *data)
+void		calc_vect_wall(t_struct *data)
 {
 	if (RAYDIR_X < 0)
 	{
@@ -59,31 +59,39 @@ void		touch_wall(t_struct *data)
 	}
 }
 
-void		draw(t_struct *data, int x)
+void		get_texture(t_struct *data, int pixel)
+{
+	if (MAP[MAP_X][MAP_Y] != '0')
+		COLOR = WALL_DATA[I][pixel] + WALL_DATA[I][pixel + 1] * 256 + WALL_DATA[I][pixel + 2] * 65536;
+}
+
+void		draw_wall(t_struct *data, int x)
 {
 	int	y;
-	
+	int	d;
+	int	pixel;
+
+	I = (int)(MAP[MAP_X][MAP_Y]) - 48 - 1;
 	y = DRAWSTART - 1;
 	while (++y < DRAWEND)
 	{
-		COLOR = MAROON;
+		if (SIDE == 0)
+			WALLX = RAYPOS_Y + PERPWALLDIST * RAYDIR_Y;
+		else
+			WALLX = RAYPOS_X + PERPWALLDIST * RAYDIR_X;
+		WALLX -= floor((WALLX));
+		TEXX = (int)(WALLX * (double)(TEXT_WIDTH[I]));
+		if (SIDE == 0 && RAYDIR_X > 0)
+			TEXX = TEXT_WIDTH[I] - TEXX - 1;
+		if (SIDE == 1 && RAYDIR_Y < 0)
+			TEXX = TEXT_WIDTH[I] - TEXX - 1;
+		d = y * 256 - HEIGHT * 128 + (H_LINE * 128);
+		TEXY = ((d * TEXT_HEIGHT[I]) / H_LINE) / 256;
+		pixel = TEXY * TEXT_SIZE_LINE[I] + TEXX * (TEXT_BPP[I] / 8);
+		get_texture(data, pixel);
 		if (SIDE == 1)
-			COLOR = GREEN;
+			COLOR = (COLOR >> 1) & 8355711;
 		write_data_pixel(data, x, y, COLOR);
-	}
-}
-
-void		draw_sky_floor(t_struct *data, int x, int y)
-{
-	if (DRAWEND < 0)
-		DRAWEND = HEIGHT;
-	y = DRAWEND - 1;
-	while (++y < HEIGHT)
-	{
-		write_data_pixel(data, x, y, ORANGE);
-		write_data_pixel(data, x, HEIGHT - y - 1, GRAY);
-		if (JUMP == 1)
-			write_data_pixel(data, x, HEIGHT - y - 1 + 95, GRAY);
 	}
 }
 
@@ -98,7 +106,7 @@ void		ray_cast_wall(t_struct *data, int x)
 	MAP_Y = RAYPOS_Y;
 	DELTADIST_X = sqrt(1 + (RAYDIR_Y * RAYDIR_Y) / (RAYDIR_X * RAYDIR_X));
 	DELTADIST_Y = sqrt(1 + (RAYDIR_X * RAYDIR_X) / (RAYDIR_Y * RAYDIR_Y));
-	calc_vect(data);
+	calc_vect_wall(data);
 	touch_wall(data);
 	if (SIDE == 0)
 		PERPWALLDIST = (MAP_X - RAYPOS_X + (1 - STEP_X) / 2) / RAYDIR_X;
@@ -116,6 +124,6 @@ void		ray_cast_wall(t_struct *data, int x)
 		DRAWEND *= 1.12;
 		DRAWSTART *= 1.12;
 	}
-	draw(data, x);
+	draw_wall(data, x);
 	draw_sky_floor(data, x, Y);
 }

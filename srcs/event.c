@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 00:05:24 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/06 17:08:09 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/20 15:37:47 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			key_func(int keycode, t_struct *data)
 	if (keycode == 257)
 	{
 		FAST++;
-		SPEED = 0.5;
+		SPEED = 0.3;
 	}
 	if (keycode == 49)
 		JUMP++;

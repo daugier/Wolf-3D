@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 18:13:26 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/06 17:06:57 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/21 22:53:44 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include </System/Library/Frameworks/Tk.framework/Versions/8.5/Headers/X11/X.h>
 # include "../libs/libft/includes/libft.h"
 
+/*define color*/
+
 # define RED 0xFF0000
 # define DARKKHAKI 0xB8B868
 # define GREEN 0x00FF00
@@ -29,6 +31,10 @@
 # define GRAY 0x808080
 # define GOLDENROD 0xFFD800
 # define MAROON 0x800000
+
+/*define number of texture*/
+
+# define NB_TEXT 10
 
 /*define moovement*/
 
@@ -72,6 +78,19 @@
 # define H_LINE data->raycast.h_line
 # define TIME data->raycast.time
 # define OLD_TIME data->raycast.old_time
+# define CU_DIST data->raycast.current_dist
+# define DIST_PLAY data->raycast.dist_player
+# define CU_FLOOR_X data->raycast.current_floor_x
+# define CU_FLOOR_Y data->raycast.current_floor_y
+# define DIST_WALL data->raycast.dist_wall
+# define FLOOR_TEXX data->raycast.floor_texx
+# define FLOOR_TEXY data->raycast.floor_texy
+# define FLOOR_X data->raycast.floorxwall
+# define FLOOR_Y data->raycast.floorywall
+# define TEXY data->raycast.texy
+# define TEXX data->raycast.texx
+# define WALLX data->raycast.wallx
+# define WEIGHT data->raycast.weight
 
 /*define structure data*/
 
@@ -102,26 +121,41 @@
 
 /*define texture*/
 
-# define WALL_ONE data->texture.wall_one
-# define WALL_TWO data->texture.wall_two
-# define WALL_ONE_X data->texture.wall_one_x
-# define WALL_ONE_Y data->texture.wall_one_y
-# define SIZE_LINE_WALL data->texture.size_line_wall
-# define WALLADD data->texture.walladd
+# define TEXT_BPP data->texture.text_bpp
+# define WALL data->texture.wall
+# define TEXT_WIDTH data->texture.text_width
+# define TEXT_HEIGHT data->texture.text_height
+# define TEXT_SIZE_LINE data->texture.text_size_line
+# define WALL_DATA data->texture.wall_data
+# define I data->texture.i
 
 typedef struct	s_text
 {
-	void					*wall_one;
-	void					*wall_two;
-	char					*walladd;
-	int						wall_one_y;
-	int						wall_one_x;
-	int						size_line_wall;
+	int						i;
+	int						*text_bpp;
+	void					**wall;
+	char					**wall_data;
+	int						*text_width;
+	int						*text_height;
+	int						*text_size_line;
 }
 				t_text;
 
 typedef struct	s_raycast
 {
+	double					weight;
+	double					wallx;
+	int						texx;
+	int						texy;
+	double					current_dist;
+	double					dist_player;
+	double					dist_wall;
+	double						current_floor_x;
+	double						current_floor_y;
+	int						floor_texx;
+	int						floor_texy;
+	double					floorxwall;
+	double					floorywall;
 	double					speed;
 	double					rotspeed;
 	double					pos_x;
@@ -181,6 +215,8 @@ typedef struct	s_struct
 	t_raycast			raycast;
 }				t_struct;
 
+void				draw_sky_floor(t_struct *data, int x, int y);
+void				init_texture(t_struct *data);
 int					key_func_bis(int keycode, t_struct *data);
 int					mouse_func(int button, int x, int y, t_struct *data);
 void				ft_rotate_left(t_struct *data);

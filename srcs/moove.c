@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 17:23:14 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/05 11:52:12 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/21 20:16:08 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,33 @@
 
 void		ft_back(t_struct *data)
 {
-	if (MAP[(int)(POS_X - DIRX * SPEED)][(int)POS_Y] != '1')
+	if (MAP[(int)(POS_X - DIRX * SPEED)][(int)POS_Y] == '0')
 		POS_X -= DIRX * SPEED;
-	if (MAP[(int)(POS_X)][(int)(POS_Y - DIRY * SPEED)] != '1')
+	if (MAP[(int)(POS_X)][(int)(POS_Y - DIRY * SPEED)] == '0')
 		POS_Y -= DIRY * SPEED;
 }
 
 void		ft_walk(t_struct *data)
 {
-	if (MAP[(int)(POS_X + DIRX * SPEED)][(int)POS_Y] != '1')
+	if (MAP[(int)(POS_X + DIRX * SPEED)][(int)POS_Y] == '0')
 		POS_X += DIRX * SPEED;
-	if (MAP[(int)(POS_X)][(int)(POS_Y + DIRY * SPEED)] != '1')
+	if (MAP[(int)(POS_X)][(int)(POS_Y + DIRY * SPEED)] == '0')
 		POS_Y += DIRY * SPEED;
 }
 
 void		ft_right(t_struct *data)
 {
-	if (MAP[(int)(POS_X + PLANEX * SPEED)][(int)POS_Y] != '1')
+	if (MAP[(int)(POS_X + PLANEX * SPEED)][(int)POS_Y] == '0')
 		POS_X += PLANEX * SPEED;
-	if (MAP[(int)(POS_X)][(int)(POS_Y + PLANEY * SPEED)] != '1')
+	if (MAP[(int)(POS_X)][(int)(POS_Y + PLANEY * SPEED)] == '0')
 		POS_Y += PLANEY * SPEED;
 }
 
 void		ft_left(t_struct *data)
 {
-	if (MAP[(int)(POS_X - PLANEX * SPEED)][(int)POS_Y] != '1')
+	if (MAP[(int)(POS_X - PLANEX * SPEED)][(int)POS_Y] == '0')
 		POS_X -= PLANEX * SPEED;
-	if (MAP[(int)(POS_X)][(int)(POS_Y - PLANEY)] != '1')
+	if (MAP[(int)(POS_X)][(int)(POS_Y - PLANEY)] == '0')
 		POS_Y -= PLANEY * SPEED;
 }
 
