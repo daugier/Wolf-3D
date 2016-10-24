@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 00:05:24 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/20 15:37:47 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/24 23:51:29 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int			mouse_func(int button, int x, int y, t_struct *data)
 
 int			key_func(int keycode, t_struct *data)
 {
-	ft_new_screen(data);
 	if (keycode == 53)
 	{
 		free_all(data);
@@ -45,12 +44,11 @@ int			key_func(int keycode, t_struct *data)
 	if (keycode == 257)
 	{
 		FAST++;
-		SPEED = 0.3;
+		SPEED = 0.2;
+		ROT_SPEED = 0.15;
 	}
-	if (keycode == 49)
-		JUMP++;
-	if (keycode == 261)
-		SIT++;
+	if (keycode == 36)
+		AGAIN = 1;
 	return (1);
 }
 
@@ -71,11 +69,16 @@ int			key_func_bis(int keycode, t_struct *data)
 	if (keycode == 257)
 	{
 		SPEED = 0.1;
+		ROT_SPEED = 0.07;
 		FAST = 0;
 	}
-	if (keycode == 49)
-		JUMP = 0;
-	if (keycode == 261)
-		SIT = 0;
+	if (keycode == 36)
+	{
+		POS_X = 1;
+		POS_Y = 16;
+		TIME = 1;
+		time(&TIMES);
+		AGAIN = 0;
+	}
 	return (1);
 }

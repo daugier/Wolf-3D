@@ -6,7 +6,7 @@
 #    By: daugier <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/21 17:54:33 by daugier           #+#    #+#              #
-#    Updated: 2016/10/21 22:46:47 by daugier          ###   ########.fr        #
+#    Updated: 2016/10/24 19:01:10 by daugier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS = 	srcs/main.c \
 		srcs/moove.c \
 		srcs/texture.c \
 		srcs/floor_raycast.c \
+		srcs/info.c \
 
 OBJS = $(SRCS:.c=.o)
 

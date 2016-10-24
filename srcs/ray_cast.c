@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 17:21:29 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/21 23:31:16 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/24 21:45:54 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,14 @@ void		touch_wall(t_struct *data)
 			MAP_Y += STEP_Y;
 			SIDE = 1;
 		}
-		if (MAP[MAP_X][MAP_Y] != '0')
+		if (MAP[MAP_X][MAP_Y] > '1')
 			HIT = 1;
 	}
 }
 
 void		get_texture(t_struct *data, int pixel)
 {
-	if (MAP[MAP_X][MAP_Y] != '0')
-		COLOR = WALL_DATA[I][pixel] + WALL_DATA[I][pixel + 1] * 256 + WALL_DATA[I][pixel + 2] * 65536;
+	COLOR = WALL_DATA[I][pixel] + WALL_DATA[I][pixel + 1] * 256 + WALL_DATA[I][pixel + 2] * 65536;
 }
 
 void		draw_wall(t_struct *data, int x)
@@ -71,7 +70,7 @@ void		draw_wall(t_struct *data, int x)
 	int	d;
 	int	pixel;
 
-	I = (int)(MAP[MAP_X][MAP_Y]) - 48 - 1;
+	I = (int)(MAP[MAP_X][MAP_Y]) - 48;
 	y = DRAWSTART - 1;
 	while (++y < DRAWEND)
 	{
@@ -91,6 +90,8 @@ void		draw_wall(t_struct *data, int x)
 		get_texture(data, pixel);
 		if (SIDE == 1)
 			COLOR = (COLOR >> 1) & 8355711;
+		if (TIME <= 10 && TIME % 2 == 0)
+			COLOR &= RED;
 		write_data_pixel(data, x, y, COLOR);
 	}
 }
@@ -112,18 +113,13 @@ void		ray_cast_wall(t_struct *data, int x)
 		PERPWALLDIST = (MAP_X - RAYPOS_X + (1 - STEP_X) / 2) / RAYDIR_X;
 	else
 		PERPWALLDIST = (MAP_Y - RAYPOS_Y + (1 - STEP_Y) / 2) / RAYDIR_Y;
-	H_LINE = HEIGHT / PERPWALLDIST;
+	H_LINE = (HEIGHT / PERPWALLDIST);
 	DRAWSTART = (-H_LINE / 2 + HEIGHT / 2);
 	DRAWEND = (H_LINE / 2 + HEIGHT / 2);
 	if (DRAWSTART < 0)
 		DRAWSTART = 0;
 	if (DRAWEND >= HEIGHT)
 		DRAWEND = HEIGHT - 1;
-	if (JUMP == 1)
-	{
-		DRAWEND *= 1.12;
-		DRAWSTART *= 1.12;
-	}
 	draw_wall(data, x);
 	draw_sky_floor(data, x, Y);
 }

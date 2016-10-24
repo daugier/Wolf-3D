@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/06 16:15:06 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/21 22:13:33 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 00:14:53 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,17 @@
 
 void		init_raycast(t_struct *data)
 {
-	POS_X = 1;
-	POS_Y = 126;
+	POS_X = 2;
+	POS_Y = 16;
 	DIRX = -1;
 	DIRY = 0;
 	PLANEX = 0;
 	PLANEY = 1;
 	SPEED = 0.1;
-	ROT_SPEED = 0.05;
+	ROT_SPEED = 0.07;
 	MOOVE = 0;
-	JUMP = 0;
-	SIT = 0;
 	FAST = 0;
+	TIME = 1;
 }
 
 void			ft_new_screen(t_struct *data)
@@ -66,5 +65,6 @@ t_struct		*ft_init_struct(char *av)
 	init_texture(data);
 	DATA = mlx_get_data_addr(IMG, &BPP, &SIZE_LINE, &ENDIAN);
 	init_raycast(data);
+	time(&TIMES);
 	return (data);
 }

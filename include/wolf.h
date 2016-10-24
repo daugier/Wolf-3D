@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 18:13:26 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/21 22:53:44 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/24 23:24:25 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define __WOLF_H
 
 # include <mlx.h>
+# include <time.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <math.h>
@@ -34,7 +35,7 @@
 
 /*define number of texture*/
 
-# define NB_TEXT 10
+# define NB_TEXT 20
 
 /*define moovement*/
 
@@ -76,7 +77,6 @@
 # define DRAWEND data->raycast.drawend
 # define ROT_SPEED data->raycast.rotspeed
 # define H_LINE data->raycast.h_line
-# define TIME data->raycast.time
 # define OLD_TIME data->raycast.old_time
 # define CU_DIST data->raycast.current_dist
 # define DIST_PLAY data->raycast.dist_player
@@ -94,6 +94,9 @@
 
 /*define structure data*/
 
+# define AGAIN data->again
+# define TIME data->time
+# define TIMES data->times
 # define OLD_DRAWEND data->old_drawend
 # define SIT data->sit
 # define JUMP data->jump
@@ -175,7 +178,6 @@ typedef struct	s_raycast
 	double					deltadist_y;
 	double					perpwalldist;
 	double					hit;
-	double					time;
 	double					old_time;
 	int					step_x;
 	int					step_y;
@@ -189,6 +191,9 @@ typedef struct	s_raycast
 
 typedef struct	s_struct
 {
+	int					again;
+	int					time;
+	time_t				times;
 	int					old_drawend;
 	int					jump;
 	int					fast;
@@ -215,6 +220,8 @@ typedef struct	s_struct
 	t_raycast			raycast;
 }				t_struct;
 
+void				display_end(t_struct *data, int i);
+void				info(t_struct *data);
 void				draw_sky_floor(t_struct *data, int x, int y);
 void				init_texture(t_struct *data);
 int					key_func_bis(int keycode, t_struct *data);

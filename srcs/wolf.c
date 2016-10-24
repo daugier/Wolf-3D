@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 16:50:49 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/06 17:08:08 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 00:14:51 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,22 @@ void	write_data_pixel(t_struct *data, int x, int y, int color)
 
 int		wolf(t_struct *data)
 {
-	X = -1;
-	while (++X <= WIDTH)
+
+	ft_new_screen(data);
+	if (TIME == 0)
+		display_end(data, 10);
+	if (MAP[(int)POS_X][(int)POS_Y] == '1' && TIME > 0)
+		display_end(data, 11);
+	else if (TIME)
 	{
-		ray_cast_wall(data, X);
+		X = -1;
+		while (++X <= WIDTH)
+		{
+			ray_cast_wall(data, X);
+		}
+		ft_moove(data);
+		mlx_put_image_to_window(MLX, WIN, IMG, 0, 0);
+		info(data);
 	}
-	ft_moove(data);
-	mlx_put_image_to_window(MLX, WIN, IMG, 0, 0);
 	return (0);
 }
