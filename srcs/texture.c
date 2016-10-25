@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:32:42 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/24 23:26:06 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 17:30:36 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	init_texture(t_struct *data)
 	//looser
 	WALL[10] = mlx_xpm_file_to_image(MLX, "Texture/looser2.xpm", &TEXT_WIDTH[10], &TEXT_HEIGHT[10]);
 	WALL_DATA[10] = mlx_get_data_addr(WALL[10], &TEXT_BPP[10], &TEXT_SIZE_LINE[10], &ENDIAN);
-	WALL[11] = mlx_xpm_file_to_image(MLX, "Texture/end2.xpm", &TEXT_WIDTH[11], &TEXT_HEIGHT[11]);
+	WALL[11] = mlx_xpm_file_to_image(MLX, "Texture/gg.xpm", &TEXT_WIDTH[11], &TEXT_HEIGHT[11]);
 	WALL_DATA[11] = mlx_get_data_addr(WALL[11], &TEXT_BPP[11], &TEXT_SIZE_LINE[11], &ENDIAN);
 }
 

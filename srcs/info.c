@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 18:44:42 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 17:05:26 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 17:31:44 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void		display_win(t_struct *data, char *end)
 	mlx_string_put(MLX, WIN, 5, 5, color, "GREAT JOB ! only ");
 	mlx_string_put(MLX, WIN, 185, 5, color, end);
 	mlx_string_put(MLX, WIN, 215, 5, color, "Second ! ");
-	mlx_string_put(MLX, WIN, 600, 5, color, "Press ENTER for retry ");
-	mlx_string_put(MLX, WIN, 600, 25, color, "Press ESCAPE for quit ");
+	mlx_string_put(MLX, WIN, 900, 5, color, "Press ENTER for retry ");
+	mlx_string_put(MLX, WIN, 900, 25, color, "Press ESCAPE for quit ");
 //	write_score(data, end);
 }
 

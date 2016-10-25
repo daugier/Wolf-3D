@@ -6,11 +6,21 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 18:54:21 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/24 23:12:51 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 17:10:23 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+
+int				quit_func(int keycode, t_struct *data)
+{
+	if (keycode == 17)
+	{
+		free_all(data);
+		exit(EXIT_SUCCESS);
+	}
+	return (1);
+}
 
 void			free_all(t_struct *data)
 {
@@ -30,6 +40,7 @@ int				main(int ac, char **av)
 	data = ft_init_struct(av[1]);
 	wolf(data);
 	mlx_loop_hook(MLX, wolf, data);
+	mlx_hook(WIN, 17, ButtonMotionMask, quit_func, data);
 	mlx_hook(WIN, KeyPress, KeyPressMask, key_func, data);
 	mlx_hook(WIN, KeyRelease, KeyReleaseMask, key_func_bis, data);
 	mlx_hook(WIN, ButtonPress, ButtonPressMask, mouse_func, data);
