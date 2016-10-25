@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 00:05:24 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 17:10:23 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 18:17:46 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int			key_func(int keycode, t_struct *data)
 	}
 	if (keycode == 36)
 		AGAIN = 1;
+	if (keycode == 18)
+		UN == 1 ? UN-- : UN++;
 	return (1);
 }
 

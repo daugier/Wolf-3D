@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/06 16:15:06 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 00:14:53 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 17:41:35 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void		init_raycast(t_struct *data)
 	MOOVE = 0;
 	FAST = 0;
 	TIME = 1;
+	UN = 0;
 }
 
 void			ft_new_screen(t_struct *data)

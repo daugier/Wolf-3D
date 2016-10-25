@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 17:21:29 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/24 21:45:54 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 18:17:45 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void		draw_wall(t_struct *data, int x)
 		get_texture(data, pixel);
 		if (SIDE == 1)
 			COLOR = (COLOR >> 1) & 8355711;
+		if (UN)
+			COLOR &= 0x000000;
 		if (TIME <= 10 && TIME % 2 == 0)
 			COLOR &= RED;
 		write_data_pixel(data, x, y, COLOR);
