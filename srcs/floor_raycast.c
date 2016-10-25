@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 22:23:21 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 18:55:30 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 19:26:08 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ void		get_texture_floor(t_struct *data, int pixel)
 
 void		draw_sky(t_struct *data, int x, int y, int pixel)
 {
-	if (I == 0)
-		COLOR = 0x000000;
 	if (I == 1)
 		I = 9;
 	FLOOR_TEXX = (int)(CU_FLOOR_X * TEXT_WIDTH[I]) % TEXT_WIDTH[I];
 	FLOOR_TEXY = (int)(CU_FLOOR_Y * TEXT_HEIGHT[I]) % TEXT_HEIGHT[I];
 	pixel = FLOOR_TEXY * TEXT_SIZE_LINE[I] + FLOOR_TEXX * (TEXT_BPP[I] / 8);
 	get_texture_floor(data, pixel);
+	if (I == 0)
+		COLOR = 0x000000;
 	if (UN && MAP[(int)CU_FLOOR_X][(int)CU_FLOOR_Y] != '1')
 		COLOR &= 0x585858;
 	if (TIME <= 10 && TIME % 2 == 0)
