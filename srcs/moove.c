@@ -6,19 +6,11 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 17:23:14 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/24 20:53:59 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 22:35:24 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
-
-void		ft_back(t_struct *data)
-{
-	if (MAP[(int)(POS_X - DIRX * SPEED)][(int)POS_Y] < '2')
-		POS_X -= DIRX * SPEED;
-	if (MAP[(int)(POS_X)][(int)(POS_Y - DIRY * SPEED)] < '2')
-		POS_Y -= DIRY * SPEED;
-}
 
 void		ft_walk(t_struct *data)
 {

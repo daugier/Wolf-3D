@@ -6,7 +6,7 @@
 #    By: daugier <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/21 17:54:33 by daugier           #+#    #+#              #
-#    Updated: 2016/10/24 19:01:10 by daugier          ###   ########.fr        #
+#    Updated: 2016/10/25 23:16:23 by daugier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIB = -L ./libs/libft/ -lft -L ./libs/minilibx_macos/ -lft
 
 HEADER = -I ./include
 
-CC = @gcc -I./include
+CC = @gcc -I./include -Wall -Wextra -Werror
 
 MLX = -lmlx -framework OpenGL -framework AppKit 
 
@@ -31,17 +31,11 @@ SRCS = 	srcs/main.c \
 		srcs/texture.c \
 		srcs/floor_raycast.c \
 		srcs/info.c \
+		srcs/moove_two.c \
 
 OBJS = $(SRCS:.c=.o)
 
 $(NAME): $(OBJS)
-	@echo "\x1b[33m[WW        WW  WWWWWWWWWW  WW        WWWWWWWWW  WWWWWWWW  WWWWWWWW]"
-	@echo "\x1b[33m[OO        OO  OO      OO  OO        OO               OO  OO     OO]"
-	@echo "\x1b[33m[LL        LL  LL      LL  LL        LLLLLL           LL  LL      LL]"
-	@echo "\x1b[33m[FF  FFFF  FF  FF      FF  FF        FF         FFFFFFFF  FF      FF]"
-	@echo "\x1b[33m[33 33  33 33  33      33  33        33               33  33     33]"
-	@echo "\x1b[33m[DDDD    DDDD  DDDDDDDDDD  DDDDDDDD  DD         DDDDDDDD  DDDDDDDD]"
-	@echo "\033[35m                                                                       By Augier Dorian"
 	@make -C libs/libft/
 	@echo "\033[34m[OK]\033[36m LIBFT COMPILED"
 	@make -C libs/minilibx_macos/

@@ -1,24 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   windows_param.c                                    :+:      :+:    :+:   */
+/*   info.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/24 18:44:42 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 19:59:28 by daugier          ###   ########.fr       */
+/*   Created: 2016/10/25 21:55:15 by daugier           #+#    #+#             */
+/*   Updated: 2016/10/25 22:35:56 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-void		display_looser(t_struct *data)
+void			display_end(t_struct *data, int i)
+{
+	int	x;
+	int y;
+	int color;
+	int	pixel;
+
+	x = -1;
+	while (++x < WIDTH && (y = -1))
+		while (++y < HEIGHT)
+		{
+			pixel = y * TEXT_SIZE_LINE[i] + x * (TEXT_BPP[i] / 8);
+			color = WALL_DATA[i][pixel] + WALL_DATA[i][pixel + 1] * 256 +
+				WALL_DATA[i][pixel + 2] * 65536;
+			if (TIME == 0)
+				color &= RED;
+			write_data_pixel(data, x, y, color);
+		}
+	mlx_put_image_to_window(MLX, WIN, IMG, 0, 0);
+	info(data);
+}
+
+static void		display_time(t_struct *data, char *c, int color)
+{
+	mlx_string_put(MLX, WIN, 5, 5, color, "Time : ");
+	mlx_string_put(MLX, WIN, 70, 5, color, c);
+}
+
+static void		display_looser(t_struct *data)
 {
 	int		color;
 	time_t	times;
 
 	color = 0xFF0000;
-	mlx_string_put(MLX, WIN, 5, 5, color, "YOU LOOOOOOOSE ! YOU ARE A LOOSER !! NOOB ");
+	mlx_string_put(MLX, WIN, 5, 5, color, "YOU LOOOOOOOSE ! NOOB !!");
 	color = 0xA633;
 	time(&times);
 	if (times % 2 == 0)
@@ -28,7 +56,7 @@ void		display_looser(t_struct *data)
 	}
 }
 
-void		display_win(t_struct *data, char *end)
+static void		display_win(t_struct *data, char *end)
 {
 	int		color;
 	time_t	times;
@@ -45,34 +73,11 @@ void		display_win(t_struct *data, char *end)
 	}
 }
 
-void		display_end(t_struct *data, int i)
-{
-	int x;
-	int y;
-	int color;
-	int	pixel;
-
-	x = -1;
-	while (++x < WIDTH && (y = -1))
-		while (++y < HEIGHT)
-		{
-			pixel = y * TEXT_SIZE_LINE[i] + x * (TEXT_BPP[i] / 8);
-			color = WALL_DATA[i][pixel] + WALL_DATA[i][pixel + 1] * 256 + WALL_DATA[i][pixel + 2] * 65536;
-			if (TIME == 0)
-				color &= RED;
-			write_data_pixel(data, x, y, color);
-		}
-	mlx_put_image_to_window(MLX, WIN, IMG, 0, 0);
-	info(data);
-}
-
-void		info(t_struct *data)
+void			info(t_struct *data)
 {
 	time_t						tmp;
 	char						*c;
 	int							color;
-	int							x;
-	int							y;
 	char						*end;
 
 	color = 0xFFFFFF;
@@ -89,10 +94,7 @@ void		info(t_struct *data)
 	else if (TIME == 0)
 		display_looser(data);
 	else
-	{
-		mlx_string_put(MLX, WIN, 5, 5, color, "Time : ");
-		mlx_string_put(MLX, WIN, 70, 5, color, c);
-	}
-	free(c);
+		display_time(data, c, color);
 	free(end);
+	free(c);
 }

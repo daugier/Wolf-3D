@@ -6,13 +6,32 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 17:21:29 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 20:01:49 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 23:15:41 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-void		calc_vect_wall(t_struct *data)
+static void		calc_wall(t_struct *data, int y)
+{
+	int d;
+
+	I = (int)(MAP[MAP_X][MAP_Y]) - 48;
+	if (SIDE == 0)
+		WALLX = RAYPOS_Y + PERPWALLDIST * RAYDIR_Y;
+	else
+		WALLX = RAYPOS_X + PERPWALLDIST * RAYDIR_X;
+	WALLX -= floor((WALLX));
+	TEXX = (int)(WALLX * (double)(TEXT_WIDTH[I]));
+	if (SIDE == 0 && RAYDIR_X > 0)
+		TEXX = TEXT_WIDTH[I] - TEXX - 1;
+	if (SIDE == 1 && RAYDIR_Y < 0)
+		TEXX = TEXT_WIDTH[I] - TEXX - 1;
+	d = y * 256 - HEIGHT * 128 + (H_LINE * 128);
+	TEXY = ((d * TEXT_HEIGHT[I]) / H_LINE) / 256;
+}
+
+static void		calc_vect_wall(t_struct *data)
 {
 	if (RAYDIR_X < 0)
 	{
@@ -34,10 +53,9 @@ void		calc_vect_wall(t_struct *data)
 		STEP_Y = 1;
 		SIDEDIST_Y = (MAP_Y + 1.0 - RAYPOS_Y) * DELTADIST_Y;
 	}
-
 }
 
-void		touch_wall(t_struct *data)
+static void		touch_wall(t_struct *data)
 {
 	HIT = 0;
 	while (HIT == 0)
@@ -59,28 +77,15 @@ void		touch_wall(t_struct *data)
 	}
 }
 
-void		draw_wall(t_struct *data, int x)
+static void		draw_wall(t_struct *data, int x)
 {
 	int	y;
-	int	d;
 	int	pixel;
 
-	I = (int)(MAP[MAP_X][MAP_Y]) - 48;
 	y = DRAWSTART - 1;
 	while (++y < DRAWEND)
 	{
-		if (SIDE == 0)
-			WALLX = RAYPOS_Y + PERPWALLDIST * RAYDIR_Y;
-		else
-			WALLX = RAYPOS_X + PERPWALLDIST * RAYDIR_X;
-		WALLX -= floor((WALLX));
-		TEXX = (int)(WALLX * (double)(TEXT_WIDTH[I]));
-		if (SIDE == 0 && RAYDIR_X > 0)
-			TEXX = TEXT_WIDTH[I] - TEXX - 1;
-		if (SIDE == 1 && RAYDIR_Y < 0)
-			TEXX = TEXT_WIDTH[I] - TEXX - 1;
-		d = y * 256 - HEIGHT * 128 + (H_LINE * 128);
-		TEXY = ((d * TEXT_HEIGHT[I]) / H_LINE) / 256;
+		calc_wall(data, y);
 		pixel = TEXY * TEXT_SIZE_LINE[I] + TEXX * (TEXT_BPP[I] / 8);
 		get_texture(data, pixel);
 		if (SIDE == 1)
@@ -97,7 +102,7 @@ void		draw_wall(t_struct *data, int x)
 	}
 }
 
-void		ray_cast_wall(t_struct *data, int x)
+void			ray_cast_wall(t_struct *data, int x)
 {
 	CAM_X = (2 * x / (double)WIDTH) - 1;
 	RAYPOS_X = POS_X;
@@ -110,17 +115,14 @@ void		ray_cast_wall(t_struct *data, int x)
 	DELTADIST_Y = sqrt(1 + (RAYDIR_X * RAYDIR_X) / (RAYDIR_Y * RAYDIR_Y));
 	calc_vect_wall(data);
 	touch_wall(data);
+	PERPWALLDIST = (MAP_Y - RAYPOS_Y + (1 - STEP_Y) / 2) / RAYDIR_Y;
 	if (SIDE == 0)
 		PERPWALLDIST = (MAP_X - RAYPOS_X + (1 - STEP_X) / 2) / RAYDIR_X;
-	else
-		PERPWALLDIST = (MAP_Y - RAYPOS_Y + (1 - STEP_Y) / 2) / RAYDIR_Y;
-	H_LINE = (HEIGHT / PERPWALLDIST);
+	H_LINE = HEIGHT / PERPWALLDIST;
 	DRAWSTART = (-H_LINE / 2 + HEIGHT / 2);
 	DRAWEND = (H_LINE / 2 + HEIGHT / 2);
-	if (DRAWSTART < 0)
-		DRAWSTART = 0;
-	if (DRAWEND >= HEIGHT)
-		DRAWEND = HEIGHT - 1;
+	DRAWSTART < 0 ? DRAWSTART = 0 : 0;
+	DRAWEND >= HEIGHT ? DRAWEND = HEIGHT - 1 : 0;
 	draw_wall(data, x);
-	draw_sky_floor(data, x, Y);
+	draw_floor(data, x, Y);
 }

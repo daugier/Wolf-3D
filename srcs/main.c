@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 18:54:21 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 19:00:20 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 22:33:30 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int				main(int ac, char **av)
 	mlx_hook(WIN, 17, ButtonMotionMask, quit_func, data);
 	mlx_hook(WIN, KeyPress, KeyPressMask, key_func, data);
 	mlx_hook(WIN, KeyRelease, KeyReleaseMask, key_func_bis, data);
-	mlx_hook(WIN, ButtonPress, ButtonPressMask, mouse_func, data);
 	mlx_loop(MLX);
 	free_all(data);
 	return (0);

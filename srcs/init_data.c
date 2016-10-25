@@ -6,13 +6,20 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/06 16:15:06 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 19:20:11 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 22:33:51 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-void		init_raycast(t_struct *data)
+void			ft_new_screen(t_struct *data)
+{
+	mlx_destroy_image(MLX, IMG);
+	IMG = mlx_new_image(MLX, WIDTH, HEIGHT);
+	DATA = mlx_get_data_addr(IMG, &BPP, &SIZE_LINE, &ENDIAN);
+}
+
+static void		init_raycast(t_struct *data)
 {
 	POS_X = 14;
 	POS_Y = 16;
@@ -29,18 +36,9 @@ void		init_raycast(t_struct *data)
 	START = 0;
 }
 
-void			ft_new_screen(t_struct *data)
-{
-	mlx_destroy_image(MLX, IMG);
-	IMG = mlx_new_image(MLX, WIDTH, HEIGHT);
-	DATA = mlx_get_data_addr(IMG, &BPP, &SIZE_LINE, &ENDIAN);
-}
-
 static void		recup_map(t_struct *data, char *map_name)
 {
-	int		x;
 	char	*file;
-
 
 	if (!(file = get_file(map_name)))
 		exit(EXIT_SUCCESS);
