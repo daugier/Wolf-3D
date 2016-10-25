@@ -6,11 +6,27 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 18:44:42 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 00:14:52 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 17:05:26 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+
+void		write_score(t_struct *data, char *end)
+{
+	int	color;
+	int		fd;
+	char	*str;
+	char	*tmp;
+	
+	fd = open("score.txt", O_RDWR, O_APPEND);
+	ft_putstr_fd("DODO : ", fd);
+	ft_putstr_fd(end, fd);
+	ft_putendl_fd("Seconde", fd);
+	color = 0xA633;
+	end = get_file("score.txt");
+	mlx_string_put(MLX, WIN, 5, 50, color, end);
+}
 
 void		display_looser(t_struct *data)
 {
@@ -33,6 +49,7 @@ void		display_win(t_struct *data, char *end)
 	mlx_string_put(MLX, WIN, 215, 5, color, "Second ! ");
 	mlx_string_put(MLX, WIN, 600, 5, color, "Press ENTER for retry ");
 	mlx_string_put(MLX, WIN, 600, 25, color, "Press ESCAPE for quit ");
+//	write_score(data, end);
 }
 
 void		display_end(t_struct *data, int i)
@@ -67,8 +84,8 @@ void		info(t_struct *data)
 
 	color = 0xFFFFFF;
 	time(&tmp);
-	if ((5 - tmp + TIMES) >= 0 && MAP[(int)POS_X][(int)POS_Y] != '1')
-		TIME = 5 - tmp + TIMES;
+	if ((60 - tmp + TIMES) >= 0 && MAP[(int)POS_X][(int)POS_Y] != '1')
+		TIME = 60 - tmp + TIMES;
 	c = ft_itoa(TIME);
 	tmp = 60 - TIME;
 	end = ft_itoa(tmp);
