@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 00:05:24 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 18:17:46 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 19:20:13 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,12 @@ int			key_func(int keycode, t_struct *data)
 		ROT_SPEED = 0.15;
 	}
 	if (keycode == 36)
+	{
 		AGAIN = 1;
+		START = 1;
+		POS_X = 14;
+		POS_Y = 16;
+	}
 	if (keycode == 18)
 		UN == 1 ? UN-- : UN++;
 	return (1);
@@ -76,8 +81,6 @@ int			key_func_bis(int keycode, t_struct *data)
 	}
 	if (keycode == 36)
 	{
-		POS_X = 1;
-		POS_Y = 16;
 		TIME = 1;
 		time(&TIMES);
 		AGAIN = 0;

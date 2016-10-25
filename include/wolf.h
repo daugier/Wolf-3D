@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 18:13:26 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 17:39:54 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 18:25:57 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@
 
 /*define structure data*/
 
+# define START data->start
 # define UN data->un
 # define AGAIN data->again
 # define TIME data->time
@@ -192,6 +193,7 @@ typedef struct	s_raycast
 
 typedef struct	s_struct
 {
+	int					start;
 	int					un;
 	int					again;
 	int					time;

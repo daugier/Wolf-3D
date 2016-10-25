@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/06 16:15:06 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 17:41:35 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 19:20:11 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		init_raycast(t_struct *data)
 {
-	POS_X = 2;
+	POS_X = 14;
 	POS_Y = 16;
 	DIRX = -1;
 	DIRY = 0;
@@ -26,6 +26,7 @@ void		init_raycast(t_struct *data)
 	FAST = 0;
 	TIME = 1;
 	UN = 0;
+	START = 0;
 }
 
 void			ft_new_screen(t_struct *data)
