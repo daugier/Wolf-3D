@@ -6,50 +6,43 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 18:44:42 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 18:29:21 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 19:59:28 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-void		write_score(t_struct *data, char *end)
-{
-	int	color;
-	int		fd;
-	char	*str;
-	char	*tmp;
-	
-	fd = open("score.txt", O_RDWR, O_APPEND);
-	ft_putstr_fd("DODO : ", fd);
-	ft_putstr_fd(end, fd);
-	ft_putendl_fd("Seconde", fd);
-	color = 0xA633;
-	end = get_file("score.txt");
-	mlx_string_put(MLX, WIN, 5, 50, color, end);
-}
-
 void		display_looser(t_struct *data)
 {
-	int	color;
+	int		color;
+	time_t	times;
 
 	color = 0xFF0000;
 	mlx_string_put(MLX, WIN, 5, 5, color, "YOU LOOOOOOOSE ! YOU ARE A LOOSER !! NOOB ");
 	color = 0xA633;
-	mlx_string_put(MLX, WIN, 900, 5, color, "Press ENTER for retry ");
-	mlx_string_put(MLX, WIN, 900, 25, color, "Press ESCAPE for quit ");
+	time(&times);
+	if (times % 2 == 0)
+	{
+		mlx_string_put(MLX, WIN, 900, 5, color, "Press ENTER for retry ");
+		mlx_string_put(MLX, WIN, 900, 25, color, "Press ESCAPE for quit ");
+	}
 }
 
 void		display_win(t_struct *data, char *end)
 {
-	int	color;
+	int		color;
+	time_t	times;
 
 	color = 0xA633;
 	mlx_string_put(MLX, WIN, 5, 5, color, "GREAT JOB ! only ");
 	mlx_string_put(MLX, WIN, 185, 5, color, end);
 	mlx_string_put(MLX, WIN, 215, 5, color, "Second ! ");
-	mlx_string_put(MLX, WIN, 900, 5, color, "Press ENTER for retry ");
-	mlx_string_put(MLX, WIN, 900, 25, color, "Press ESCAPE for quit ");
-//	write_score(data, end);
+	time(&times);
+	if (times % 2 == 0)
+	{
+		mlx_string_put(MLX, WIN, 900, 5, color, "Press ENTER for retry ");
+		mlx_string_put(MLX, WIN, 900, 25, color, "Press ESCAPE for quit ");
+	}
 }
 
 void		display_end(t_struct *data, int i)

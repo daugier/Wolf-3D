@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 18:13:26 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 18:25:57 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 20:01:46 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,7 @@ typedef struct	s_struct
 	t_raycast			raycast;
 }				t_struct;
 
+void				get_texture(t_struct *data, int pixel);
 void				display_end(t_struct *data, int i);
 void				info(t_struct *data);
 void				draw_sky_floor(t_struct *data, int x, int y);

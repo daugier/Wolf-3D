@@ -6,11 +6,16 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:32:42 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 17:30:36 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 20:05:22 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+
+void		get_texture(t_struct *data, int pixel)
+{
+	COLOR = WALL_DATA[I][pixel] + WALL_DATA[I][pixel + 1] * 256 + WALL_DATA[I][pixel + 2] * 65536;
+}
 
 void	init_texture(t_struct *data)
 {
@@ -32,7 +37,7 @@ void	init_texture(t_struct *data)
 	
 	WALL[4] = mlx_xpm_file_to_image(MLX, "Texture/exte.xpm", &TEXT_WIDTH[4], &TEXT_HEIGHT[4]);
 	WALL_DATA[4] = mlx_get_data_addr(WALL[4], &TEXT_BPP[4], &TEXT_SIZE_LINE[4], &ENDIAN);
-	WALL[5] = mlx_xpm_file_to_image(MLX, "Texture/end.xpm", &TEXT_WIDTH[5], &TEXT_HEIGHT[5]);
+	WALL[5] = mlx_xpm_file_to_image(MLX, "Texture/gg.xpm", &TEXT_WIDTH[5], &TEXT_HEIGHT[5]);
 	WALL_DATA[5] = mlx_get_data_addr(WALL[5], &TEXT_BPP[5], &TEXT_SIZE_LINE[5], &ENDIAN);
 	
 	//ciel

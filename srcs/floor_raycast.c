@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 22:23:21 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 19:26:08 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 20:05:21 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ void		calc_vect_floor(t_struct *data)
 	}
 }
 
-void		get_texture_floor(t_struct *data, int pixel)
-{
-	COLOR = WALL_DATA[I][pixel] + WALL_DATA[I][pixel + 1] * 256 + WALL_DATA[I][pixel + 2] * 65536;
-}
-
 void		draw_sky(t_struct *data, int x, int y, int pixel)
 {
 	if (I == 1)
@@ -48,11 +43,15 @@ void		draw_sky(t_struct *data, int x, int y, int pixel)
 	FLOOR_TEXX = (int)(CU_FLOOR_X * TEXT_WIDTH[I]) % TEXT_WIDTH[I];
 	FLOOR_TEXY = (int)(CU_FLOOR_Y * TEXT_HEIGHT[I]) % TEXT_HEIGHT[I];
 	pixel = FLOOR_TEXY * TEXT_SIZE_LINE[I] + FLOOR_TEXX * (TEXT_BPP[I] / 8);
-	get_texture_floor(data, pixel);
+	get_texture(data, pixel);
 	if (I == 0)
 		COLOR = 0x000000;
 	if (UN && MAP[(int)CU_FLOOR_X][(int)CU_FLOOR_Y] != '1')
-		COLOR &= 0x585858;
+	{
+		COLOR &= 0xFF0000;
+		if (TIME % 2 == 0)
+			COLOR &= 0x000000;
+	}
 	if (TIME <= 10 && TIME % 2 == 0)
 		COLOR &= RED;
 	write_data_pixel(data, x, HEIGHT - y, COLOR);
@@ -78,10 +77,14 @@ void		draw_sky_floor(t_struct *data, int x, int y)
 		FLOOR_TEXX = (int)(CU_FLOOR_X * TEXT_WIDTH[I]) % TEXT_WIDTH[I];
 		FLOOR_TEXY = (int)(CU_FLOOR_Y * TEXT_HEIGHT[I]) % TEXT_HEIGHT[I];
 		pixel = FLOOR_TEXY * TEXT_SIZE_LINE[I] + FLOOR_TEXX * (TEXT_BPP[I] / 8);
-		get_texture_floor(data, pixel);
+		get_texture(data, pixel);
 		COLOR = (COLOR >> 1) & 8355711;
 		if (UN && MAP[(int)CU_FLOOR_X][(int)CU_FLOOR_Y] != '1')
-			COLOR = 0xCECECE;
+		{
+			COLOR &= 0xFF0000;
+			if (TIME % 2 == 0)
+				COLOR &= 0x000000;
+		}
 		if (TIME <= 10 && TIME % 2 == 0)
 			COLOR &= RED;
 		write_data_pixel(data, x, y, COLOR);

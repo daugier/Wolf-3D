@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 16:50:49 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 19:26:09 by daugier          ###   ########.fr       */
+/*   Updated: 2016/10/25 19:59:56 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ void	display_touch(t_struct *data)
 {
 	int	color;
 
-	time(&TIMES);
 	color = 0xFF0000;
-	if (TIMES % 2 == 0)
-		mlx_string_put(MLX, WIN, 500, 250, 0xFF6600, "HOW TO PLAY");
+	mlx_string_put(MLX, WIN, 500, 250, 0xFF6600, "HOW TO PLAY");
 	mlx_string_put(MLX, WIN, 400, 300, 0x000000, "Press 1 for Dark mode after start!");
 	mlx_string_put(MLX, WIN, 450, 350, color, "Left Straff  ->  A");
 	mlx_string_put(MLX, WIN, 450, 370, color, "Right Straff ->  D");
@@ -42,10 +40,12 @@ void	display_start(t_struct *data)
 			color = 0xFFD800;
 			write_data_pixel(data, x, y, color);
 		}
-	color = 0xA633;
 	mlx_put_image_to_window(MLX, WIN, IMG, 0, 0);
+	color = 0xA633;
+	time(&TIMES);
+	if (TIMES % 2 == 0)
+		mlx_string_put(MLX, WIN, 450, 150, color, "Press ENTER for START ");
 	mlx_string_put(MLX, WIN, 350, 100, color, "Try to finish the labitynth before 60 Seconds !");
-	mlx_string_put(MLX, WIN, 450, 150, color, "Press ENTER for START ");
 	display_touch(data);
 }
 
@@ -80,7 +80,7 @@ void	write_data_pixel(t_struct *data, int x, int y, int color)
 		DATA[y * SIZE_LINE + x * (BPP / 8) + 1] = g;
 		DATA[y * SIZE_LINE + x * (BPP / 8) + 2] = b;
 		if (FAST)
-			DATA[y * SIZE_LINE + x * (BPP / 8) + 3] = 150;
+			DATA[y * SIZE_LINE + x * (BPP / 8) + 3] = 50;
 	}
 }
 
