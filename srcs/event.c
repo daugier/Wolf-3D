@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 00:05:24 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 22:10:29 by daugier          ###   ########.fr       */
+/*   Updated: 2016/11/11 22:52:53 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 
 static int		key_func_bis_two(int keycode, t_struct *data)
 {
-	if (keycode == 257)
+	if (keycode == 257 || keycode == 258)
 	{
 		SPEED = 0.1;
-		ROT_SPEED = 0.07;
+		ROT_SPEED = 0.12;
 		FAST = 0;
+	}
+	if (keycode == 49 && (int)POS_X == 12 && (int)POS_Y == 31)
+	{
+		POS_X = 3.5;
+		POS_Y = 31.5;
 	}
 	if (keycode == 36)
 	{
@@ -31,7 +36,7 @@ static int		key_func_bis_two(int keycode, t_struct *data)
 
 static int		key_func_two(int keycode, t_struct *data)
 {
-	if (keycode == 257)
+	if (keycode == 257 || keycode == 258)
 	{
 		FAST++;
 		SPEED = 0.2;

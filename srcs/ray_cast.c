@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 17:21:29 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 23:15:41 by daugier          ###   ########.fr       */
+/*   Updated: 2016/11/10 11:26:22 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void		calc_wall(t_struct *data, int y)
 		TEXX = TEXT_WIDTH[I] - TEXX - 1;
 	if (SIDE == 1 && RAYDIR_Y < 0)
 		TEXX = TEXT_WIDTH[I] - TEXX - 1;
-	d = y * 256 - HEIGHT * 128 + (H_LINE * 128);
+	d = y * 256 - HEIGHT * 128 + H_LINE * 128;
 	TEXY = ((d * TEXT_HEIGHT[I]) / H_LINE) / 256;
 }
 

@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 18:13:26 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 22:50:29 by daugier          ###   ########.fr       */
+/*   Updated: 2016/11/11 21:32:03 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <mlx.h>
 # include <time.h>
 # include <unistd.h>
-# include <stdio.h>
 # include <math.h>
 # include "mlx.h"
 # include <OpenCL/opencl.h>

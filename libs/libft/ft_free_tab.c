@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 17:42:27 by daugier           #+#    #+#             */
-/*   Updated: 2016/05/24 17:44:24 by daugier          ###   ########.fr       */
+/*   Updated: 2016/11/02 10:35:17 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,5 @@ void	ft_free_tab(char **tab)
 	while (tab[i])
 		free(tab[i++]);
 	free(tab);
+	tab = NULL;
 }

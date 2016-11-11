@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 22:23:21 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 23:14:12 by daugier          ###   ########.fr       */
+/*   Updated: 2016/11/06 16:45:47 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,14 @@ static void		calc_vect_floor(t_struct *data)
 
 static void		draw_sky(t_struct *data, int x, int y, int pixel)
 {
-	if (I == 1)
-		I = 9;
+	if (I == 0)
+		I = 8;
 	FLOOR_TEXX = (int)(CU_FLOOR_X * TEXT_WIDTH[I]) % TEXT_WIDTH[I];
 	FLOOR_TEXY = (int)(CU_FLOOR_Y * TEXT_HEIGHT[I]) % TEXT_HEIGHT[I];
 	pixel = FLOOR_TEXY * TEXT_SIZE_LINE[I] + FLOOR_TEXX * (TEXT_BPP[I] / 8);
 	get_texture(data, pixel);
-	if (I == 0)
-		COLOR = 0x000000;
 	if (UN && MAP[(int)CU_FLOOR_X][(int)CU_FLOOR_Y] != '1')
 	{
-		COLOR &= 0xFF0000;
 		if (TIME % 2 == 0)
 			COLOR &= 0x000000;
 	}

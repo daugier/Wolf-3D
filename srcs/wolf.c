@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 16:50:49 by daugier           #+#    #+#             */
-/*   Updated: 2016/10/25 22:31:44 by daugier          ###   ########.fr       */
+/*   Updated: 2016/11/11 22:52:53 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void		display_touch(t_struct *data)
 	mlx_string_put(MLX, WIN, 430, 300, 0x000000, "Press 1 for Dark mode !");
 	mlx_string_put(MLX, WIN, 450, 350, color, "Left Straff  ->  A");
 	mlx_string_put(MLX, WIN, 450, 370, color, "Right Straff ->  D");
-	mlx_string_put(MLX, WIN, 450, 390, color, "Walk         ->  ^");
-	mlx_string_put(MLX, WIN, 450, 410, color, "Back         ->  v");
+	mlx_string_put(MLX, WIN, 450, 390, color, "Walk         ->  ^  |  Z");
+	mlx_string_put(MLX, WIN, 450, 410, color, "Back         ->  v  |  S");
 	mlx_string_put(MLX, WIN, 450, 430, color, "Left Rotate  ->  < ");
 	mlx_string_put(MLX, WIN, 450, 450, color, "Right Rotate ->  >");
 	mlx_string_put(MLX, WIN, 450, 470, color, "Speed        ->  Shift");
@@ -46,7 +46,7 @@ static void		display_start(t_struct *data)
 	time(&TIMES);
 	if (TIMES % 2 == 0)
 		mlx_string_put(MLX, WIN, 450, 150, color, "Press ENTER for START ");
-	mlx_string_put(MLX, WIN, 350, 100, color, "Try to finish the labitynth \
+	mlx_string_put(MLX, WIN, 350, 100, color, "Try to finish the labirynth \
 			before 60 Seconds !");
 	display_touch(data);
 }
