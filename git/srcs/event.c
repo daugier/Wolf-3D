@@ -6,7 +6,7 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 00:05:24 by daugier           #+#    #+#             */
-/*   Updated: 2016/11/13 16:44:13 by daugier          ###   ########.fr       */
+/*   Updated: 2016/12/03 14:10:06 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int		key_func_two(int keycode, t_struct *data)
 	{
 		AGAIN = 1;
 		START = 1;
-		POS_X = 14;
+		POS_X = 13.5;
 		POS_Y = 16.5;
 	}
 	if (keycode == 18)

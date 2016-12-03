@@ -6,11 +6,12 @@
 /*   By: daugier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/06 16:15:06 by daugier           #+#    #+#             */
-/*   Updated: 2016/11/13 16:44:09 by daugier          ###   ########.fr       */
+/*   Updated: 2016/12/03 14:14:42 by daugier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+#include <stdio.h>
 
 void			ft_new_screen(t_struct *data)
 {
@@ -21,8 +22,8 @@ void			ft_new_screen(t_struct *data)
 
 static void		init_raycast(t_struct *data)
 {
-	POS_X = 14;
-	POS_Y = 16;
+	POS_X = 14.5;
+	POS_Y = 16.5;
 	DIRX = -1;
 	DIRY = 0;
 	PLANEX = 0;
@@ -39,28 +40,28 @@ static void		init_raycast(t_struct *data)
 static int		parse_map(t_struct *data)
 {
 	int i;
-	int	larg;
 	int	j;
 	int k;
 
 	i = -1;
 	k = -1;
-	larg = ft_strlen(MAP[0]);
 	while (MAP[0][++k])
 		if (MAP[0][k] < '5')
 			return (0);
-	k = -1;
-	while (MAP[++i])
+	while (MAP[++i] && (k = -1))
 	{
 		j = ft_strlen(MAP[i]);
-		if (MAP[i][++k] < '0' || MAP[i][k] > '9')
-			return (0);
-		if (j != larg || MAP[i][j - 1] < '5' || MAP[i][0] < '5')
+		while (MAP[i][++k])
+		{
+			if (MAP[i][k] < '0' || MAP[i][k] > '9')
+				return (0);
+		}
+		if (j != Y_MAX || MAP[i][j - 1] < '5' || MAP[i][0] < '5')
 			return (0);
 	}
 	k = -1;
 	while (MAP[i - 1][++k])
-		if (MAP[i - 1][k] < '5')
+		if (MAP[i - 1][k] < '5' || MAP[13][16] < '0' || MAP[13][16] > '1')
 			return (0);
 	return (1);
 }
@@ -82,7 +83,7 @@ static void		recup_map(t_struct *data, char *map_name)
 	Y_MAX = ft_strlen(MAP[0]);
 	free(file);
 	file = NULL;
-	if (!parse_map(data))
+	if (X_MAX < 14 || Y_MAX < 17 || !parse_map(data))
 	{
 		ft_putstr("Wrong Map\n");
 		exit(EXIT_FAILURE);
